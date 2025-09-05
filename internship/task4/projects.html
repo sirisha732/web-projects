@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects – Padavala Devi Durga Sireesha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body data-page="projects">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="logo">PS</span>
+      <span class="brand-text">Padavala Devi Durga Sireesha</span>
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-label="Open Menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="index.html" data-link="about">About</a>
+      <a href="projects.html" data-link="projects">Projects</a>
+      <a href="contact.html" data-link="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container flow">
+    <h1>Projects</h1>
+
+    <div class="filters">
+      <input id="search" class="input" type="search" placeholder="Search projects…" aria-label="Search projects">
+      <select id="tagFilter" class="input" aria-label="Filter by tag">
+        <option value="all">All Tags</option>
+        <option>Machine Learning</option>
+        <option>Web</option>
+        <option>Java</option>
+      </select>
+    </div>
+
+    <section id="projectGrid" class="card-grid three">
+      <!-- Project 1 -->
+      <article class="card project" data-tags="Machine Learning,Python">
+        <div class="card-media placeholder">📹</div>
+        <div class="card-body">
+          <h3>Road Accident Detection Using ML</h3>
+          <p>
+            Built Random Forest & Decision Tree models on vehicle movement and video features
+            (speed, acceleration, braking) to detect early accident patterns.
+          </p>
+          <ul class="tags">
+            <li>Machine Learning</li><li>Python</li>
+          </ul>
+          <div class="meta">Accuracy: ~90% (validated)</div>
+          <div class="card-actions">
+            <a class="btn small" href="#" aria-disabled="true">Demo (coming soon)</a>
+            <a class="btn small outline" href="#" aria-disabled="true">Code (private)</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="card project" data-tags="Machine Learning,Python,Web">
+        <div class="card-media placeholder">✉</div>
+        <div class="card-body">
+          <h3>Spam Email Detection (SVM)</h3>
+          <p>
+            Feature-engineered with word frequency & TF-IDF; trained linear SVM for robust spam
+            classification with precision/recall tracking.
+          </p>
+          <ul class="tags">
+            <li>Machine Learning</li><li>Python</li><li>Web</li>
+          </ul>
+          <div class="meta">Accuracy: ~95% (tested)</div>
+          <div class="card-actions">
+            <a class="btn small" href="#" aria-disabled="true">Live (coming soon)</a>
+            <a class="btn small outline" href="#" aria-disabled="true">Notebook</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Add more projects easily by copying a card -->
+      <article class="card project" data-tags="Web,Java">
+        <div class="card-media placeholder">🌐</div>
+        <div class="card-body">
+          <h3>Mini Full-Stack Sample</h3>
+          <p>
+            A starter CRUD app scaffolded with HTML/CSS front-end and Java (Spring Boot basics)
+            back-end to practice REST patterns and SQL.
+          </p>
+          <ul class="tags">
+            <li>Web</li><li>Java</li>
+          </ul>
+          <div class="meta">Status: In progress</div>
+          <div class="card-actions">
+            <a class="btn small" href="#" aria-disabled="true">Docs</a>
+            <a class="btn small outline" href="#" aria-disabled="true">Repo</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <p>© <span id="year"></span> Padavala Devi Durga Sireesha</p>
+      <p><a href="mailto:sireeshapadavala8@gmail.com">sireeshapadavala5@gmail.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>

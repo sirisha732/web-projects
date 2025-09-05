@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do & Product App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00bcd4;
+      margin-top: 40px;
+    }
+
+    /* To-Do Section */
+    #todo-section input {
+      padding: 10px;
+      width: 70%;
+      max-width: 400px;
+    }
+
+    #todo-section button {
+      padding: 10px;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .task {
+      background: white;
+      margin: 10px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid #ccc;
+    }
+
+    .task button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    /* Product Section */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .controls select {
+      padding: 8px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 600px) {
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background: #333;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📝 To-Do & 🛒 Product Listing App</h1>
+  </header>
+
+  <main>
+
+    <!-- TO-DO LIST -->
+    <section id="todo-section">
+      <h2>To-Do List (with LocalStorage)</h2>
+      <input type="text" id="taskInput" placeholder="Enter a task..." />
+      <button onclick="addTask()">Add Task</button>
+      <div id="taskList"></div>
+    </section>
+
+    <!-- PRODUCT LISTING -->
+    <section id="product-section">
+      <h2>Product Listing (Filter & Sort)</h2>
+
+      <div class="controls">
+        <label>
+          Category:
+          <select id="categoryFilter" onchange="renderProducts()">
+            <option value="all">All</option>
+            <option value="tech">Tech</option>
+            <option value="books">Books</option>
+            <option value="clothing">Clothing</option>
+          </select>
+        </label>
+
+        <label>
+          Sort by Price:
+          <select id="priceSort" onchange="renderProducts()">
+            <option value="asc">Low to High</option>
+            <option value="desc">High to Low</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="products" id="productList"></div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Your Name. All rights reserved.
+  </footer>
+
+  <script>
+    // ====== TO-DO LIST LOGIC ======
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    function saveTasks() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+      const taskList = document.getElementById('taskList');
+      taskList.innerHTML = '';
+
+      tasks.forEach((task, index) => {
+        const div = document.createElement('div');
+        div.className = 'task';
+        div.innerHTML = `
+          <span>${task}</span>
+          <button onclick="deleteTask(${index})">X</button>
+        `;
+        taskList.appendChild(div);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const task = input.value.trim();
+      if (task) {
+        tasks.push(task);
+        saveTasks();
+        renderTasks();
+        input.value = '';
+      }
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      saveTasks();
+      renderTasks();
+    }
+
+    // ====== PRODUCT LISTING LOGIC ======
+    const products = [
+      { name: "Smartphone", category: "tech", price: 699 },
+      { name: "Laptop", category: "tech", price: 1299 },
+      { name: "T-shirt", category: "clothing", price: 25 },
+      { name: "Book: JS Guide", category: "books", price: 35 },
+      { name: "Headphones", category: "tech", price: 199 },
+      { name: "Jacket", category: "clothing", price: 89 },
+      { name: "Book: CSS Mastery", category: "books", price: 29 }
+    ];
+
+    function renderProducts() {
+      const category = document.getElementById('categoryFilter').value;
+      const sort = document.getElementById('priceSort').value;
+
+      let filtered = [...products];
+      if (category !== 'all') {
+        filtered = filtered.filter(p => p.category === category);
+      }
+
+      filtered.sort((a, b) => sort === 'asc' ? a.price - b.price : b.price - a.price);
+
+      const container = document.getElementById('productList');
+      container.innerHTML = '';
+
+      filtered.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          <h3>${p.name}</h3>
+          <p>Category: ${p.category}</p>
+          <p>Price: $${p.price}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // INIT
+    renderTasks();
+    renderProducts();
+  </script>
+</body>
+</html>

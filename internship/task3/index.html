@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Quiz & Joke App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Responsive Quiz & Joke App</h1>
+  </header>
+
+  <main>
+    <section class="quiz-section">
+      <h2>🧠 Quiz</h2>
+      <div id="quiz"></div>
+      <button onclick="submitQuiz()">Submit Quiz</button>
+      <p id="result"></p>
+    </section>
+
+    <hr />
+
+    <section class="joke-section">
+      <h2>😂 Random Joke</h2>
+      <button onclick="getJoke()">Get Joke</button>
+      <p id="joke"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
